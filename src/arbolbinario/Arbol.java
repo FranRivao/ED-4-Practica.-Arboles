@@ -163,12 +163,30 @@ public class Arbol {
     // ------------------------------------------------------------------------
     // TODO 2.4
     public String[] generarDerivaciones() {
-        System.out.print("La frase reconstruida del arbol es: ");
-        this.generarDerivacionesRec(raiz);
-        return null;
+        return generarDerivacionesRec(raiz).split(" {2}");
     }
 
-    private void generarDerivacionesRec(NodoArbol nodo) {
+    private String generarDerivacionesRec(NodoArbol nodo) {
+        String r1 = null, r2, r3;
+        if (nodo != null) {
+            if (nodo.getDerecho() != null) {
+                r1 = String.format("%s->%s %s", nodo.getDato(), nodo.getIzquierdo().getDato(), nodo.getDerecho().getDato());
+                r2 = generarDerivacionesRec(nodo.getIzquierdo());
+                r3 = generarDerivacionesRec(nodo.getDerecho());
+                if (r2 != null && r3 != null){
+                    r1 += "  " + r2 + "  " + r3;
+                }
+
+            } else if (nodo.getIzquierdo() != null){
+                r1 = String.format("%s->%s", nodo.getDato(), nodo.getIzquierdo().getDato());
+                r2 = generarDerivacionesRec(nodo.getIzquierdo());
+                r3 = generarDerivacionesRec(nodo.getDerecho());
+                if (r2 != null && r3 != null){
+                    r1 += "  " + r2 + "  " + r3;
+                }
+            }
+        }
+        return r1;
     }
 
     // ------------------------------------------------------------------------
@@ -178,14 +196,20 @@ public class Arbol {
     }
 
     private String generarFraseRec(NodoArbol nodo) {
-        String s = "";
+        String s1 = "", s2, s3;
         if (nodo != null) {
-            if (Utilidades.esSimboloTerminal(nodo.getDato()))
-                s += nodo.getDato() + " ";
-            this.generarFraseRec(nodo.getIzquierdo());
-            this.generarFraseRec(nodo.getDerecho());
+            if (Utilidades.esSimboloTerminal(nodo.getDato())) {
+                s1 = nodo.getDato() + " ";
+            }
+
+            s2 = this.generarFraseRec(nodo.getIzquierdo());
+            s3 = this.generarFraseRec(nodo.getDerecho());
+
+            if (s2 != null && s3 != null) {
+                s1 = s2 + s3 + s1;
+            }
         }
-        return s;
+        return s1;
     }
 
 }

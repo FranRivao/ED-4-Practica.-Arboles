@@ -21,9 +21,10 @@ public class Pruebas {
         Arbol a = new Arbol(reglas);
         System.out.println();
 
-        String s = a.generarFrase();
-        System.out.println(s);
-        System.out.printf("La frase reconstruida del arbol es: %s\n", s);
+        mostrarReglas("Derivaciones en PreOrden: ", a.generarDerivaciones());
+        System.out.println();
+
+        System.out.printf("La frase reconstruida del arbol es: %s\n", a.generarFrase());
     }
 
     private static void mostrarReglas(String mensaje, String [] reglas) {
