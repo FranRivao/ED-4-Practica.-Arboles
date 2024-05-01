@@ -1,5 +1,9 @@
 package arbolbusqueda;
 
+import arbolbinario.Nodo;
+
+import java.awt.font.FontRenderContext;
+
 public class ArbolBinarioBusqueda {
 
 	private NodoArbol raiz;
@@ -164,11 +168,47 @@ public class ArbolBinarioBusqueda {
 
 	// ------------------------------------------------------------------------
 	// TODO 3.2
-	public void agregarRangoDeMatriculas(int matInicio, int matFin, Alumno a) {}
+	public void agregarRangoDeMatriculas(int matInicio, int matFin, Alumno a) {
+		NodoArbol nodoPiv = agregarRangoDeMatriculasRec(matInicio, a, raiz);
+		for (int i = 1; i <= matFin-matInicio; i++) {
+			nodoPiv = agregarRangoDeMatriculasRec(matInicio+i, a, nodoPiv);
+		}
+	}
+
+	private NodoArbol agregarRangoDeMatriculasRec(int clave, Alumno a, NodoArbol nodo) {
+		NodoArbol res = null;
+		if (nodo == null) {
+			res = new NodoArbol(new Alumno("Temporal", clave, 0.0));
+		} else if (nodo.getClave() < clave) {
+			res = agregarRangoDeMatriculasRec(clave, a, nodo.getDerecho());
+			nodo.setDerecho(res);
+		} else if (nodo.getClave() > clave) {
+			res = agregarRangoDeMatriculasRec(clave, a, nodo.getIzquierdo());
+		} else {
+			System.out.println("La clave " + clave + " ya existe");
+		}
+		return res;
+	}
 
 	// ------------------------------------------------------------------------
 	// TODO 3.3
-	public void eliminarRangoMatriculas(int minimaMat, int maximaMat) {}
+	public void eliminarRangoMatriculas(int minimaMat, int maximaMat) {
+		eliminarRangoMatriculasRec(minimaMat, raiz);
+	}
+
+	private void eliminarRangoMatriculasRec(int clave, NodoArbol nodo) {
+		if (nodo != null) {
+
+			if (nodo.getClave() < clave) {
+				eliminarRangoMatriculasRec(clave, nodo.getDerecho());
+			} else if (nodo.getClave() > clave) {
+				eliminarRangoMatriculasRec(clave, nodo.getIzquierdo());
+			}
+
+			
+			System.out.println(nodo.getClave());
+		}
+	}
 
 	// ------------------------------------------------------------------------
 	// TODO 3.4
