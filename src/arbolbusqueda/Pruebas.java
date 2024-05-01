@@ -24,8 +24,18 @@ public class Pruebas {
 		Ab.insertar(alumnos[3]);
 		Ab.insertar(alumnos[4]);
 
+		System.out.println("ABB alumnos (inicial). Preorden con niveles: ");
+		Ab.preOrdenNivel();
+		System.out.println();
+
+		System.out.println("ABB alumnos tras agregar el rango de matrículas [1300-1310].Preorden con niveles: ");
 		Ab.agregarRangoDeMatriculas(1300, 1310, new Alumno("Temporal", 1300, 0.0));
-		Ab.eliminarRangoMatriculas(1300, 1310);
-//		Ab.preOrdenNivel();
+		Ab.preOrdenNivel();
+		System.out.println();
+
+		System.out.println("ABB alumnos tras eliminar el rango de matrículas [1300-6000]. Preorden con niveles:");
+		Ab.eliminarRangoMatriculas(1300, 6000);
+		Ab.preOrdenNivel();
+		System.out.println();
 	}
 }

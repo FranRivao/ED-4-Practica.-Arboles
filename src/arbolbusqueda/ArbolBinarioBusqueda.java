@@ -193,21 +193,22 @@ public class ArbolBinarioBusqueda {
 	// ------------------------------------------------------------------------
 	// TODO 3.3
 	public void eliminarRangoMatriculas(int minimaMat, int maximaMat) {
-		eliminarRangoMatriculasRec(minimaMat, raiz);
+
+//		for(int i = minimaMat; i <= minimaMat)
+		raiz = eliminarRangoMatriculasRec(raiz, minimaMat, maximaMat);
 	}
 
-	private void eliminarRangoMatriculasRec(int clave, NodoArbol nodo) {
+	private NodoArbol eliminarRangoMatriculasRec(NodoArbol nodo, int min, int max) {
 		if (nodo != null) {
+			nodo.setIzquierdo(eliminarRangoMatriculasRec(nodo.getIzquierdo() , min, max));
+			nodo.setDerecho(eliminarRangoMatriculasRec(nodo.getDerecho(), min, max));
 
-			if (nodo.getClave() < clave) {
-				eliminarRangoMatriculasRec(clave, nodo.getDerecho());
-			} else if (nodo.getClave() > clave) {
-				eliminarRangoMatriculasRec(clave, nodo.getIzquierdo());
+			if (nodo.getClave() >= min && nodo.getClave() <= max) {
+				nodo = borrarRec(nodo, nodo.getClave());
 			}
-
-			
-			System.out.println(nodo.getClave());
 		}
+
+		return nodo;
 	}
 
 	// ------------------------------------------------------------------------
