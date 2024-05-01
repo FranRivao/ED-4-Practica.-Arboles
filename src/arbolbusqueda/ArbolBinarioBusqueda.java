@@ -193,8 +193,6 @@ public class ArbolBinarioBusqueda {
 	// ------------------------------------------------------------------------
 	// TODO 3.3
 	public void eliminarRangoMatriculas(int minimaMat, int maximaMat) {
-
-//		for(int i = minimaMat; i <= minimaMat)
 		raiz = eliminarRangoMatriculasRec(raiz, minimaMat, maximaMat);
 	}
 
@@ -213,7 +211,25 @@ public class ArbolBinarioBusqueda {
 
 	// ------------------------------------------------------------------------
 	// TODO 3.4
-	public Alumno encontrarSucesorInmediato(Alumno a) {return null;}
+	public Alumno encontrarSucesorInmediato(Alumno a) {
+		NodoArbol nodo = encontrarSucesorInmediatoRec(raiz, a.getMatricula());
+		if (nodo != null) {
+			return nodo.getDerecho().getDato();
+		}
+		return null;
+	}
+
+	private NodoArbol encontrarSucesorInmediatoRec(NodoArbol nodo, int clave) {
+		if (nodo == null) return  null;
+
+		if (nodo.getClave() < clave) {
+			nodo = encontrarSucesorInmediatoRec(nodo.getDerecho(), clave);
+		} else if (nodo.getClave() > clave) {
+			nodo = encontrarSucesorInmediatoRec(nodo.getIzquierdo(), clave);
+		}
+
+		return nodo;
+	}
 
 	//------------------------------------------------------------------------
 	// TODO 3.5
