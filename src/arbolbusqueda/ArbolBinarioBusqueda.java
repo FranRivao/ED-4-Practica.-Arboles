@@ -170,7 +170,7 @@ public class ArbolBinarioBusqueda {
 	// TODO 3.2
 	public void agregarRangoDeMatriculas(int matInicio, int matFin, Alumno a) {
 		NodoArbol nodoPiv = agregarRangoDeMatriculasRec(matInicio, a, raiz);
-		for (int i = 1; i <= matFin-matInicio; i++) {
+		for (int i = 1; i < matFin-matInicio; i++) {
 			nodoPiv = agregarRangoDeMatriculasRec(matInicio+i, a, nodoPiv);
 		}
 	}
@@ -233,6 +233,21 @@ public class ArbolBinarioBusqueda {
 
 	//------------------------------------------------------------------------
 	// TODO 3.5
-	public void pivotarSobre(Alumno a) {}
+	public void pivotarSobre(Alumno a) {
+		raiz = buscarNodo(a.getMatricula(), raiz);
+	}
 
+	private NodoArbol buscarNodo(int clave, NodoArbol nodo) {
+		if (nodo != null && nodo.getClave() != clave) {
+			if (clave < nodo.getClave()) {
+				nodo.setIzquierdo(buscarNodo(clave, nodo.getIzquierdo()));
+				return rotarDerecha(nodo);
+			} else {
+				nodo.setDerecho(buscarNodo(clave, nodo.getDerecho()));
+				return rotarIzquierda(nodo);
+			}
+		}
+
+		return nodo;
+	}
 }

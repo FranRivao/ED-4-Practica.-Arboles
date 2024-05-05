@@ -48,6 +48,15 @@ public class Pruebas {
 		mostrarSucesor(alumnos[5], sigPedro);
 		mostrarSucesor(alumnos[2], sigAlicia);
 		System.out.println();
+
+		System.out.println("ABB alumnos tras pivotar a " + alumnos[3].getNombre() + " a la raiz. Preorden con niveles:");
+		Ab.pivotarSobre(alumnos[3]);
+		Ab.preOrdenNivel();
+		System.out.println();
+
+		System.out.println("ABB alumnos tras pivotar a " + alumnos[3].getNombre() + " a la raiz. Preorden con niveles:");
+		Ab.pivotarSobre(alumnos[3]);
+		Ab.preOrdenNivel();
 	}
 
 	private static void mostrarSucesor(Alumno a, Alumno sucesor) {
