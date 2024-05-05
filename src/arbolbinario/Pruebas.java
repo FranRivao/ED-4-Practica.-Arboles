@@ -14,17 +14,23 @@ public class Pruebas {
                 "N→gato|perro|película\n" +
                 "V →ve|come\n");
 
-        String [] reglas = {"S->SN PV", "SN->DET N", "DET->el", "N->gato", "PV->V SN",
+        String [] reglas1 = {"S->SN PV", "SN->DET N", "DET->el", "N->gato", "PV->V SN",
                 "V->ve", "SN->DET N", "DET->la", "N->pelicula"};
 
-        mostrarReglas("Arbol sintactico para la siguiente secuencia de reglas", reglas);
-        Arbol a = new Arbol(reglas);
+        mostrarReglas("Arbol sintactico para la siguiente secuencia de reglas", reglas1);
+        Arbol a1 = new Arbol(reglas1);
+        mostrarReglas("Derivaciones en PreOrden: ", a1.generarDerivaciones());
+        System.out.printf("La frase reconstruida del arbol es: %s\n", a1.generarFrase());
         System.out.println();
 
-        mostrarReglas("Derivaciones en PreOrden: ", a.generarDerivaciones());
+        String [] reglas2 = {"S->SN PV", "PV->V SN", "V->come", "SN->DET N", "DET->el", "N->perro"};
+        mostrarReglas("Arbol sintactico para la siguiente secuencia de reglas", reglas2);
+        Arbol a2 = new Arbol(reglas2);
         System.out.println();
 
-        System.out.printf("La frase reconstruida del arbol es: %s\n", a.generarFrase());
+        String [] reglas3 = {"S->SN PV", "N->perro"};
+        mostrarReglas("Arbol sintactico para la siguiente secuencia de reglas", reglas3);
+        Arbol a3 = new Arbol(reglas3);
     }
 
     private static void mostrarReglas(String mensaje, String [] reglas) {

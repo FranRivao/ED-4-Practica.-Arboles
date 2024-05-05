@@ -101,6 +101,7 @@ public class Arbol {
     // ------------------------------------------------------------------------
     // TODO 2.3
     public Arbol(String[] reglas) {
+        boolean aplicada = false;
         raiz = new NodoArbol("S");
         Cola colAux = new Cola();
         colAux.encolar(raiz);
@@ -110,7 +111,7 @@ public class Arbol {
             String parteIzq = Utilidades.getParteIzquierda(reglas[contadorRegla]),
                     parteDer = Utilidades.getParteDerecha(reglas[contadorRegla]);
 
-            boolean aplicada = false; int contador = 0;
+            aplicada = false; int contador = 0;
             while(contador < colAux.getNumElementos() && !aplicada) {
                 NodoArbol nodo = colAux.desencolar();
                 if (nodo.getDato().equals(parteIzq)) {
@@ -135,8 +136,8 @@ public class Arbol {
             contadorRegla++;
         }
 
-        if (!colAux.vacia()) {
-            System.out.println("No se han podido aplicar todas las reglas");
+        if (!colAux.vacia() && aplicada) {
+            System.out.println("Error al construir el árbol: quedan símbolos no terminales sin expandir");
             raiz = null;
         }
     }
